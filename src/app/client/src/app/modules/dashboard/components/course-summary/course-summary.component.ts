@@ -162,7 +162,7 @@ export class CourseSummaryComponent implements OnInit{
   }
 
   getCourseReportsDataCsv()
-  {
+  {this.arrrayCourseReports = [];
     this.courseBatchesData.forEach(item => {
     var reportsData: any = [];
     reportsData.CourseName = item.name;
