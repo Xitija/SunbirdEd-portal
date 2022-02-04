@@ -177,6 +177,6 @@ export class EventSummaryComponent implements OnInit{
       this.arrrayEventsReports.push(EventReportsData);
     });
 
-    this.eventSummaryCourses.downloadFile(this.arrrayEventReports, 'event-report');
+    this.eventSummaryCourses.downloadFile(this.arrrayEventsReports, 'event-report');
   }
 }
