@@ -35,7 +35,7 @@ export class EventSummaryComponent implements OnInit{
   }
 
   eventBatchesData:any;
-  arrrayCourseReports : any =[];
+  arrrayEventsReports : any =[];
   @Input() paginateLimit: number = 5;
   p: any;
 
@@ -141,6 +141,7 @@ export class EventSummaryComponent implements OnInit{
 
   getCourseReportsDataCsv()
   {
+    this.arrrayEventsReports = [];
     this.eventBatchesData.forEach(item => {
       var EventReportsData: any = [];
       EventReportsData.CourseName = item.name;
@@ -151,9 +152,9 @@ export class EventSummaryComponent implements OnInit{
       EventReportsData.UsersEnrolled = item.totalEnrolled;
       EventReportsData.UsersCompleted = item.totalCompleted;
 
-      this.arrrayCourseReports.push(EventReportsData);      
+      this.arrrayEventsReports.push(EventReportsData);      
     });
 
-    this.eventSummaryCourses.downloadFile(this.arrrayCourseReports, 'course-report');
+    this.eventSummaryCourses.downloadFile(this.arrrayEventsReports, 'course-report');
   }
 }
