@@ -342,9 +342,10 @@ getFilteredData(event) {
               break;
 
             case "Upcoming":
-              
+              var timeTemp :any = dTime.toLocaleTimeString() + "+05:30";
               //if (tempFilterData > dateTime ) {
-                if( tempEventList[k].startDate >= this.todayDate && tempEventList[k].startTime > timeTemp){
+                //if( tempEventList[k].startDate >= this.todayDate && tempEventList[k].startTime > timeTemp){
+                if( tempEventList[k].startDate >= this.todayDate && tempEventList[k].startDate+"-"+tempEventList[k].startTime > this.todayDate+"-"+timeTemp){
                   tempEventListData.push(tempEventList[k]);
                 }
                 //  tempEventListData.push(tempEventList[k]);
@@ -365,7 +366,12 @@ getFilteredData(event) {
       }
       this.EventCount= data.result.count;
       //this.eventList = data.result.Event;
-      this.eventListCount = tempEventListData.length;
+      //this.eventListCount = tempEventListData.length;
+      if(this.query != ""){
+        this.eventListCount = tempEventListData.length;
+      } else {
+        this.eventListCount = data.result.count;
+      }
       this.eventList = tempEventListData;
 
       this.eventList.forEach((item, index) => {
