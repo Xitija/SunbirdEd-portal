@@ -1228,7 +1228,8 @@ const API_LIST = {
       ROLE_CHECK: [
         ROLE.CONTENT_CREATOR,
         ROLE.COURSE_CREATOR,
-        ROLE.BOOK_CREATOR
+        ROLE.BOOK_CREATOR,
+        ROLE.CONTENT_REVIEWER
       ]
     },
     '/action/content/v1/collaborator/update/:do_id': {
