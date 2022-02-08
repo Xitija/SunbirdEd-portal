@@ -48,7 +48,7 @@ build_client(){
     nvm use 12.16.1
     cd client
     echo "starting client yarn install"
-    yarn install --no-progress --production=true
+   yarn install --ignore-engines --no-progress --production=true
     echo "completed client yarn install"
     if [ $buildDockerImage == true ]
     then
@@ -70,7 +70,7 @@ build_server(){
     cd app_dist
     nvm use 12.16.1
     echo "starting server yarn install"
-    yarn install --no-progress --production=true
+    yarn install --ignore-engines --no-progress --production=true
     echo "completed server yarn install"
     node helpers/resourceBundles/build.js -task="phraseAppPull"
 }
