@@ -30,10 +30,9 @@ export class EventCreateComponent implements OnInit {
 
   showEventCreatePage() {
     this.eventCreateService.getEventFormConfig().subscribe((data: any) => {
-      console.log('EventCreatedata = ',data);
-      this.formFieldProperties = data.result['form'].data.fields;
+      this.formFieldProperties = data.result['form'].data.properties;
       this.isLoading = false;
-      console.log('EventCreate = ',data.result['form'].data.fields);
+      console.log('EventCreate = ',data.result['form'].data.properties);
     },err=>{console.error("hi", err);}
     )
   }
