@@ -354,8 +354,11 @@ getFilteredData(event) {
 
             default:
               var timeTemp :any = dTime.toLocaleTimeString() + "+05:30";
-              if (tempFilterData > dateTime) {
-              //if( tempEventList[k].startDate >= this.todayDate && tempEventList[k].startTime > timeTemp && tempEventList[k].endDate <= this.todayDate && tempEventList[k].endTime < timeTemp ){
+              // if (tempFilterData > dateTime) {
+              // //if( tempEventList[k].startDate >= this.todayDate && tempEventList[k].startTime > timeTemp && tempEventList[k].endDate <= this.todayDate && tempEventList[k].endTime < timeTemp ){
+              //   tempEventListData.push(tempEventList[k]);
+              // }
+              if( tempEventList[k].startDate >= this.todayDate && tempEventList[k].startDate+"-"+tempEventList[k].startTime > this.todayDate+"-"+timeTemp){
                 tempEventListData.push(tempEventList[k]);
               }
               break;
