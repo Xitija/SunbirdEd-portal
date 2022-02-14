@@ -4,7 +4,7 @@ import {  UserService } from '@sunbird/core';
 import * as _ from 'lodash-es';
 import { EventCreateService } from 'ngtek-event-library';
 import { Location } from '@angular/common';
-
+import { NavigationHelperService } from '@sunbird/shared';
 @Component({
   selector: 'app-event-create',
   templateUrl: './event-create.component.html',
@@ -19,7 +19,8 @@ export class EventCreateComponent implements OnInit {
   constructor( 
     public location:Location,
     private eventCreateService: EventCreateService,
-    private router: Router, private userService:UserService
+    private router: Router, private userService:UserService,
+    public navigationhelperService: NavigationHelperService
  ) { }
 
   ngOnInit() {
@@ -61,8 +62,9 @@ export class EventCreateComponent implements OnInit {
       }
     };
  }
-  cancel(event){
-    this.router.navigate(['/workspace/content/allmyevents']);
+  cancel(event)
+  {
+    this.navigationhelperService.goBack();
   }
 
   navAfterSave(res){
