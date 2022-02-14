@@ -82,6 +82,12 @@ export class AllMyEventsComponent implements OnInit {
     this.eventListService.getEventList( this.Filterdata).subscribe((data:any)=>{
        this.eventList = data.result?.Event;
        this.EventListCount= data.result?.count;
+
+       this.eventList.forEach((item, index) => {
+
+        var array = JSON.parse("[" + item.venue + "]");
+        this.eventList[index].venue = array[0].name;
+    });
       
       this.isLoading = false;
     },err=>{console.log("err",err);}
@@ -287,6 +293,12 @@ export class AllMyEventsComponent implements OnInit {
          delete this.eventList;
          this.EventListCount= data.result?.count;
           this.eventList = data.result.Event;
+          this.eventList.forEach((item, index) => {
+
+            var array = JSON.parse("[" + item.venue + "]");
+            this.eventList[index].venue = array[0].name;
+
+          });
          
         }
       }, (err) => {
@@ -302,6 +314,13 @@ export class AllMyEventsComponent implements OnInit {
     this.eventListService.getEventList(this.Filterdata,'', this.sort_by).subscribe((data:any)=>{
       this.eventList = data.result?.Event;
       this.EventListCount= data.result?.count;
+      this.eventList.forEach((item, index) => 
+      {
+
+        var array = JSON.parse("[" + item.venue + "]");
+        this.eventList[index].venue = array[0].name;
+      });
+
      this.isLoading = false;
    },err=>{console.log("err",err);}
    )
