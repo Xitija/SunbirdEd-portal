@@ -403,7 +403,9 @@ export class CourseProgressComponent implements OnInit, OnDestroy, AfterViewInit
           noOfEnrollments: 45
         }
       ];
-      this.toasterService.error(_.get(this.resourceService, 'messages.fmsg.m0004'));
+      // @TODO - Commented Error as summury report setup is not ready. Once Druid report issue resolves, Uncomment following.
+     //  this.toasterService.error(_.get(this.resourceService, 'messages.fmsg.m0004'));
+      console.log("@TODO - Commented Error as summury report setup is not ready. Once Druid report issue resolves, Uncomment following.");
       this.generateDataForDF(this.currentBatch);
     });
   }
