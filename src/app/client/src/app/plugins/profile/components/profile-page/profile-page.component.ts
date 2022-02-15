@@ -45,6 +45,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy, AfterViewInit {
   contributions = [];
   totalContributions: Number;
   attendedTraining: Array<object>;
+  coursesCount: Array<object>;
   roles: Array<string>;
   showMoreRoles = true;
   showMoreTrainings = true;
@@ -261,7 +262,14 @@ export class ProfilePageComponent implements OnInit, OnDestroy, AfterViewInit {
       this.attendedTraining = _.reverse(_.sortBy(data.enrolledCourses, val => {
         return _.isNumber(_.get(val, 'completedOn')) ? _.get(val, 'completedOn') : Date.parse(val.completedOn);
       })) || [];
-    });
+
+
+      this.coursesCount = this.attendedTraining.filter(function (el)
+      {
+        return el['content']['contentType'] =='Course'  ;
+      }
+      );
+    });  
   }
 
 /**
