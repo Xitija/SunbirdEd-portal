@@ -33,5 +33,6 @@ export const urlConfig = {
     // ImageSearchApi :  "assets/api/search-images.json",
     // EditModeApi :  "assets/api/editmode.json",
     compositeSearch: "/action/composite/v3/search",
-    attendanceApi: "/learner/course/v1/attendance/read"
+    attendanceApi: "/learner/course/v1/attendance/read",
+    baseUrl:"https://staging-sunbird.nsdl.co.in/",
 };
