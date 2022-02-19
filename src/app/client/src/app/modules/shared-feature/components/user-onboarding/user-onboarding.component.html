@@ -1,11 +1,14 @@
-<sui-modal [mustScroll]="true" *ngIf="stage === Stage.USER_SELECTION" [isClosable]="false" [transitionDuration]="0"
+<!-- /**
+ * @description - temporary stopped preferences popup
+ * @todo - Uncomment the sui-modal once preferences issue resolves
+ */ -->
+<!-- <sui-modal [mustScroll]="true" *ngIf="stage === Stage.USER_SELECTION" [isClosable]="false" [transitionDuration]="0"
   [size]="'normal'" class="sb-modal" #onboardingModal>
 
   <app-onboarding-user-selection [tenantInfo]="tenantInfo" (userSelect)="userTypeSubmit()">
   </app-onboarding-user-selection>
 
-</sui-modal>
-
+</sui-modal> -->
 <app-location-selection *ngIf="stage === Stage.LOCATION_SELECTION" [deviceProfile]="deviceProfile" [isClosable]="false"
   (close)="locationSubmit()">
   <div slot="popup-header">
