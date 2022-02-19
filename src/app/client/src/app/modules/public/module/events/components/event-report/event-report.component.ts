@@ -7,6 +7,7 @@ import {ToasterService,LayoutService, COLUMN_TYPE}from '@sunbird/shared';
 import { map, tap, switchMap, skipWhile, takeUntil, catchError, startWith } from 'rxjs/operators';
 import { forkJoin, Subject, Observable, BehaviorSubject, merge, of, concat, combineLatest } from 'rxjs';
 import { Location } from '@angular/common';
+// import {attendancelist} from './attendance';
 
 @Component({
   selector: 'app-event-report',
@@ -108,6 +109,8 @@ export class EventReportComponent implements OnInit {
       this.attendanceList = data.result.content;
       this.getEnrollEventUsersData(this.attendanceList);
     });
+    // this.attendanceList = attendancelist;
+    // this.getEnrollEventUsersData(this.attendanceList);
   }
 
   convert(event) {
@@ -144,8 +147,11 @@ export class EventReportComponent implements OnInit {
   }
   // navToDetailedAttendance($event)
   navToDetailedAttendance(event,eventItem){
+    // this.router.navigate(['/explore-events/detailed-user-report'],
+    // { queryParams:  { "userDetails": JSON.stringify({event}), "eventDetails": JSON.stringify({eventItem})} });
+
     this.router.navigate(['/explore-events/detailed-user-report'],
-    { queryParams:  { "userDetails": JSON.stringify({event}), "eventDetails": JSON.stringify({eventItem})} });
+    { queryParams:  { "userDetails": JSON.stringify(Object.assign({}, event)), "eventDetails": JSON.stringify({eventItem})} });
     // ,"eventDetails": JSON.stringify({this.eventItem})
   }
 }

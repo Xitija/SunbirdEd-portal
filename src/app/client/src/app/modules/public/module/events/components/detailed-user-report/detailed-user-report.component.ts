@@ -41,9 +41,14 @@ export class DetailedUserReportComponent implements OnInit {
       this.queryParams =  params;
       // console.log("this.queryparames", JSON.parse(this.queryParams.userDetails).event);
     });
+    console.log("qp---",this.queryParams);
+    console.log(this.queryParams.userDetails);
     if (this.queryParams) {
-       this.attendanceList = JSON.parse(this.queryParams.userDetails).event;
-       this.eventItem = JSON.parse(this.queryParams.eventDetails).eventItem;
+      //  this.attendanceList = JSON.parse(this.queryParams.userDetails).event;
+       this.attendanceList = JSON.parse(this.queryParams.userDetails)
+      //  this.eventItem = JSON.parse(this.queryParams.eventDetails).eventItem;
+       this.eventItem = JSON.parse(this.queryParams.eventDetails);
+       console.log("Attendee list---",this.attendanceList);
        this.getEnrollEventUsersData(this.attendanceList);
     }
   }
