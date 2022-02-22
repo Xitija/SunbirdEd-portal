@@ -71,6 +71,7 @@ export class EventViewTypeComponent implements OnInit {
   todaysCalenderEvent: any[];
   todaysDate: any;
   tempFlag?: any;
+  dataLimit:any;
 
   constructor(public eventListService: EventListService,
     public eventFilterService: EventFilterService,
@@ -153,8 +154,9 @@ export class EventViewTypeComponent implements OnInit {
     "status":["live"],
     "objectType": "Event"
     };
-
-    this.eventListService.getEventList(this.Filterdata).subscribe((data: any) => {
+    this.dataLimit = "3000";
+    this.eventListService.getEventList(this.Filterdata,this.query,this.sort_by,this.dataLimit).subscribe((data: any) => {
+    // this.eventListService.getEventList(this.Filterdata).subscribe((data: any) => {
       this.eventCalender = data.result.Event;
 
       this.events = this.eventCalender.map(obj => ({
