@@ -3,6 +3,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { SummaryReportsService } from './../../services';
 import { UserService, SearchService } from '@sunbird/core';
 import * as _ from 'lodash-es';
+import {LayoutService,COLUMN_TYPE}from '@sunbird/shared';
+import { map, tap, switchMap, skipWhile, takeUntil, catchError, startWith } from 'rxjs/operators';
+import { forkJoin, Subject, Observable, BehaviorSubject, merge, of, concat, combineLatest } from 'rxjs';
 
 /**
  * The CourseSummaryCourses component
@@ -32,7 +35,7 @@ export class CourseSummaryComponent implements OnInit{
    */
 
   constructor( userService: UserService,
-    public coursesSummaryCourses: SummaryReportsService) {
+    public coursesSummaryCourses: SummaryReportsService,public layoutService: LayoutService) {
     this.userService = userService;
   }
 
@@ -58,6 +61,13 @@ export class CourseSummaryComponent implements OnInit{
   pieChartLegend : boolean= true;
   pieChartPlugins = [];
   public pieChartColors:any;
+
+  layoutConfiguration: any;
+  FIRST_PANEL_LAYOUT;
+  SECOND_PANEL_LAYOUT;
+
+  public unsubscribe = new Subject<void>();
+
 
   ngOnInit()
   {
@@ -97,8 +107,25 @@ export class CourseSummaryComponent implements OnInit{
     },(err) => {
       console.log({ err });
     });
+    this.initConfiguration();
+
   }
 
+  private initConfiguration() {
+    this.layoutConfiguration = this.layoutService.initlayoutConfig();
+    this.redoLayout();
+    this.layoutService.switchableLayout().
+        pipe(takeUntil(this.unsubscribe)).subscribe(layoutConfig => {
+          if (layoutConfig != null) {
+            this.layoutConfiguration = layoutConfig.layout;
+          }
+          this.redoLayout();
+        });
+  }
+  redoLayout() {
+    this.FIRST_PANEL_LAYOUT = this.layoutService.redoLayoutCSS(0, this.layoutConfiguration, COLUMN_TYPE.threeToNine, true);
+    this.SECOND_PANEL_LAYOUT = this.layoutService.redoLayoutCSS(1, this.layoutConfiguration, COLUMN_TYPE.threeToNine, true);
+  }
   createBarGraph(courseBatcheIds,totalCourseCompleted,totalCourseInCompleted)
   {
     this.barChartOptions = {
