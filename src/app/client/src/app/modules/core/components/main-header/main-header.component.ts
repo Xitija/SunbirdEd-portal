@@ -674,6 +674,7 @@ export class MainHeaderComponent implements OnInit, OnDestroy {
         subtype: this.layoutConfiguration ? 'joy' : 'classic'
       }
     };
+    location.reload();
     this.telemetryService.interact(interactData);
   }
 
