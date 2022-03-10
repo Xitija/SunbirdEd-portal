@@ -22,12 +22,18 @@
         <lib-event
                 [libEventConfig]="libEventConfig">
             </lib-event>
+            <div *ngIf="isLoading" class="" style="position:relative;width:100%;height: 300px;">
+                <div class="sb-loader" style="position: absolute; left: 0px; right: 0px;  width: 40px;
+                margin: 0 auto;
+                height: 40px;"></div>
+            </div>
             <sb-enroll-event-users *ngIf="eventUserEnrollData && eventItem"
                 [eventDetailItem]="eventItem"
                 [enrollEventDetails]="eventUserEnrollData"
                 (detailedReport)="navToDetailedAttendance($event, eventItem)">
             </sb-enroll-event-users>
-            <div *ngIf="!eventUserEnrollData">
+           
+            <div *ngIf="!eventUserEnrollData && !isLoading">
                 <div class="no-content-container d-flex flex-jc-center relative9">
                     <div class="my-48 p-16 w-100">
                     <div class="d-flex flex-dc flex-jc-center flex-ai-center text-center">
