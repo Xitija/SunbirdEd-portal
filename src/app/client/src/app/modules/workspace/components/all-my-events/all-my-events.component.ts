@@ -150,18 +150,17 @@ export class AllMyEventsComponent implements OnInit {
       switch (event.filtersSelected.eventTime) {
         case "Past":
           this.dates={ 
-            "max":this.todayDate
+            "max": this.todayDate
           }
             break;
         case "Upcoming":
           this.dates={ 
-            "min":this.todayDate
+            "min": this.todayDate
           }
             break;
         default:
           this.dates={ 
-            "min":this.todayDate,
-            "max":this.todayDate
+            "max": this.todayDate
           }
               break;
       } 
@@ -177,17 +176,17 @@ export class AllMyEventsComponent implements OnInit {
       switch (event.filtersSelected.eventTime) {
         case "Past":
           this.dates={ 
-            "max":this.todayDate
+            "max": this.todayDate
           }
             break;
         case "Upcoming":
           this.dates={ 
-            "min":this.todayDate
+            "min": this.todayDate
           }
             break;
         default:
           this.dates={ 
-            "max":this.todayDate
+            "max": this.todayDate
           }
               break;
       } 
@@ -204,17 +203,17 @@ export class AllMyEventsComponent implements OnInit {
       switch (event.filtersSelected.eventTime) {
         case "Past":
           this.dates={ 
-            "max":this.todayDate
+            "max": this.todayDate
           }
             break;
         case "Upcoming":
           this.dates={ 
-            "min":this.todayDate
+            "min": this.todayDate
           }
             break;
         default:
           this.dates={ 
-            "max":this.todayDate
+            "max": this.todayDate
           }
               break;
       } 
@@ -253,18 +252,17 @@ export class AllMyEventsComponent implements OnInit {
         switch (event.filtersSelected.eventTime) {
           case "Past":
             this.dates={ 
-              "max":this.todayDate
+              "max": this.todayDate
             }
               break;
           case "Upcoming":
             this.dates={ 
-              "min":this.todayDate
+              "min": this.todayDate
             }
               break;
           default:
             this.dates={ 
-              "min":this.todayDate,
-              "max":this.todayDate
+              "max": this.todayDate
             }
           break;
         } 
@@ -283,7 +281,7 @@ export class AllMyEventsComponent implements OnInit {
         "owner":this.userService.userid
       };
     }
-      var tempEventListData: any = [];
+    var tempEventListData: any = [];
     this.eventListService.getEventList(this.Filterdata,this.query).subscribe((data) => {
       if (data.responseCode == "OK") 
         {
@@ -297,11 +295,11 @@ export class AllMyEventsComponent implements OnInit {
             temp1 = tempEventList[k].endDate;
             temp2 = tempEventList[k].endTime;
             var tempFilterData = temp1 + " " + temp2;
-
+  
             var dTime = new Date();
             var dateTime: any;
             dateTime = this.todayDate + " " + dTime.toLocaleTimeString() + "+05:30";
-
+  
             if (event.filtersSelected == undefined) {
               tempEventListData = tempEventList;
             } else if (event.filtersSelected.eventTime) {
@@ -311,14 +309,14 @@ export class AllMyEventsComponent implements OnInit {
                     tempEventListData.push(tempEventList[k]);
                   }
                   break;
-
+  
                 case "Upcoming":
                   var timeTemp :any = dTime.toLocaleTimeString() + "+05:30";
                     if( tempEventList[k].startDate >= this.todayDate && tempEventList[k].startDate+"-"+tempEventList[k].startTime > this.todayDate+"-"+timeTemp){
                       tempEventListData.push(tempEventList[k]);
                     }
                   break;
-
+  
                 default:
                   var timeTemp :any = dTime.toLocaleTimeString() + "+05:30";
                   //console.log("this.todayDate :: "+this.todayDate);
