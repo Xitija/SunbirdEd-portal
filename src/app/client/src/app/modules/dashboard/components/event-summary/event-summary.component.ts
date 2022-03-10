@@ -120,7 +120,7 @@ export class EventSummaryComponent implements OnInit{
       display: true
     }
     };
-    this.barChartLabels = courseBatcheIds;
+    this.barChartLabels = this.trimEventLabels(courseBatcheIds);
     this.barChartType = 'bar';
     this.barChartLegend = true;
 
@@ -144,10 +144,10 @@ export class EventSummaryComponent implements OnInit{
         display: true
       }
     };
-    this.pieChartColors = [
-      { backgroundColor: 'orange' },
-      { backgroundColor: 'green' },
-    ];
+    // this.pieChartColors = [
+    //   { backgroundColor: 'orange' },
+    //   { backgroundColor: 'green' },
+    // ];
 
     this.pieChartColors = [
       {
@@ -157,7 +157,7 @@ export class EventSummaryComponent implements OnInit{
         ]
       }
     ];
-    this.pieChartLabels = ['Total Incompleted', 'Total Complete'];
+    this.pieChartLabels = ['Total Incomplete', 'Total Complete'];
     this.pieChartData = [totalIncompleted, totalCompleted];
     this.pieChartType = 'pie';
     this.pieChartLegend = true;
@@ -179,4 +179,17 @@ export class EventSummaryComponent implements OnInit{
 
     this.eventSummaryCourses.downloadFile(this.arrrayEventsReports, 'event-report');
   }
+
+  trimEventLabels(courseLbls): string[]{
+    let lengthLimit = 25;
+    let trimmedEventLabels : string[] =[];
+    courseLbls.forEach(function (name) {
+      let trimmedString = name.length > lengthLimit ?
+          name.substring(0, lengthLimit - 3).concat("...") : name ;
+      trimmedEventLabels.push(trimmedString);
+    })
+    console.log(trimmedEventLabels);
+    return trimmedEventLabels;
+  }
+
 }
