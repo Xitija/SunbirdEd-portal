@@ -150,12 +150,12 @@ export class AllMyEventsComponent implements OnInit {
       switch (event.filtersSelected.eventTime) {
         case "Past":
           this.dates={ 
-            "max":this.yesterdayDate
+            "max":this.todayDate
           }
             break;
         case "Upcoming":
           this.dates={ 
-            "min":this.tommorrowDate
+            "min":this.todayDate
           }
             break;
         default:
@@ -177,17 +177,16 @@ export class AllMyEventsComponent implements OnInit {
       switch (event.filtersSelected.eventTime) {
         case "Past":
           this.dates={ 
-            "max":this.yesterdayDate
+            "max":this.todayDate
           }
             break;
         case "Upcoming":
           this.dates={ 
-            "min":this.tommorrowDate
+            "min":this.todayDate
           }
             break;
         default:
           this.dates={ 
-            "min":this.todayDate,
             "max":this.todayDate
           }
               break;
@@ -205,17 +204,16 @@ export class AllMyEventsComponent implements OnInit {
       switch (event.filtersSelected.eventTime) {
         case "Past":
           this.dates={ 
-            "max":this.yesterdayDate
+            "max":this.todayDate
           }
             break;
         case "Upcoming":
           this.dates={ 
-            "min":this.tommorrowDate
+            "min":this.todayDate
           }
             break;
         default:
           this.dates={ 
-            "min":this.todayDate,
             "max":this.todayDate
           }
               break;
@@ -255,12 +253,12 @@ export class AllMyEventsComponent implements OnInit {
         switch (event.filtersSelected.eventTime) {
           case "Past":
             this.dates={ 
-              "max":this.yesterdayDate
+              "max":this.todayDate
             }
               break;
           case "Upcoming":
             this.dates={ 
-              "min":this.tommorrowDate
+              "min":this.todayDate
             }
               break;
           default:
@@ -285,14 +283,58 @@ export class AllMyEventsComponent implements OnInit {
         "owner":this.userService.userid
       };
     }
-
+      var tempEventListData: any = [];
     this.eventListService.getEventList(this.Filterdata,this.query).subscribe((data) => {
       if (data.responseCode == "OK") 
         {
           this.isLoading=false;
-         delete this.eventList;
-         this.EventListCount= data.result?.count;
-          this.eventList = data.result.Event;
+          delete this.eventList;
+
+          let tempEventList: any = data.result.Event;
+          var temp1: any;
+          var temp2: any;
+          for (var k in tempEventList) {
+            temp1 = tempEventList[k].endDate;
+            temp2 = tempEventList[k].endTime;
+            var tempFilterData = temp1 + " " + temp2;
+
+            var dTime = new Date();
+            var dateTime: any;
+            dateTime = this.todayDate + " " + dTime.toLocaleTimeString() + "+05:30";
+
+            if (event.filtersSelected == undefined) {
+              tempEventListData = tempEventList;
+            } else if (event.filtersSelected.eventTime) {
+              switch (event.filtersSelected.eventTime) {
+                case "Past":
+                  if (tempFilterData < dateTime) {
+                    tempEventListData.push(tempEventList[k]);
+                  }
+                  break;
+
+                case "Upcoming":
+                  var timeTemp :any = dTime.toLocaleTimeString() + "+05:30";
+                    if( tempEventList[k].startDate >= this.todayDate && tempEventList[k].startDate+"-"+tempEventList[k].startTime > this.todayDate+"-"+timeTemp){
+                      tempEventListData.push(tempEventList[k]);
+                    }
+                  break;
+
+                default:
+                  var timeTemp :any = dTime.toLocaleTimeString() + "+05:30";
+                  //console.log("this.todayDate :: "+this.todayDate);
+                  if( tempEventList[k].endDate >= this.todayDate && tempEventList[k].startDate+"-"+tempEventList[k].startTime < this.todayDate+"-"+timeTemp
+                  && tempEventList[k].endDate+"-"+tempEventList[k].endTime >= this.todayDate+"-"+timeTemp){
+                    tempEventListData.push(tempEventList[k]);
+                  }
+                  break;
+              }
+            } else {
+              tempEventListData = tempEventList;
+            }
+          }
+
+          this.EventListCount= data.result?.count;
+          this.eventList = tempEventListData;
           this.eventList.forEach((item, index) => {
 
             var array = JSON.parse("[" + item.venue + "]");
