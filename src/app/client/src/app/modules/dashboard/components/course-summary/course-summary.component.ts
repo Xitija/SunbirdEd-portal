@@ -150,7 +150,7 @@ export class CourseSummaryComponent implements OnInit{
     display: true
     }
     };
-    this.barChartLabels = courseBatcheIds;
+    this.barChartLabels = this.trimCourseLabels(courseBatcheIds);
     this.barChartType = 'bar';
     this.barChartLegend = true;
     this.barChartColors = [
@@ -205,4 +205,16 @@ export class CourseSummaryComponent implements OnInit{
 
     this.coursesSummaryCourses.downloadFile(this.arrrayCourseReports, 'course-report');
   }
+
+  trimCourseLabels(courseLbls): string[]{
+    let lengthLimit = 25;
+    let trimmedCourseLabels : string[] =[];
+    courseLbls.forEach(function (name) {
+      let trimmedString = name.length > lengthLimit ?
+          name.substring(0, lengthLimit - 3).concat("...") : name ;
+      trimmedCourseLabels.push(trimmedString);
+    })
+    return trimmedCourseLabels;
+  }
+
 }

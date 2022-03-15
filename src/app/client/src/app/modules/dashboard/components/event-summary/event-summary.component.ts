@@ -188,7 +188,7 @@ export class EventSummaryComponent implements OnInit{
           name.substring(0, lengthLimit - 3).concat("...") : name ;
       trimmedEventLabels.push(trimmedString);
     })
-    console.log(trimmedEventLabels);
+    //console.log(trimmedEventLabels);
     return trimmedEventLabels;
   }
 
