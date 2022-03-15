@@ -44,7 +44,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let data of courseBatchesData  | paginate: { itemsPerPage: paginateLimit, currentPage: p } let i = index ">
-                <td data-label="Name">{{data.name}}</td>
+                <td popupText="{{data.name}}" suiPopup popupPlacement="top left" data-label="Name">{{data.name}}</td>
                 <td data-label="BatchName">{{data.batchName}}</td>
                 <td data-label="TotalEnrolled">{{data.totalEnrolled}}</td>
                 <td data-label="TotalCompleted">{{data.totalCompleted}}</td>
