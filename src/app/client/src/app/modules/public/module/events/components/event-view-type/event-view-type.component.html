@@ -4,7 +4,7 @@
       [libEventConfig]="libEventConfig">
   </lib-event>
   <div class="sb-g"
-      [ngClass]="layoutConfiguration ? 'sb-g sbt-container sbt-page-content relative9' : 'ui container mt-24'"
+      [ngClass]="layoutConfiguration ? 'sb-g sbt-container sbt-page-content relative9 z-index-9' : 'ui container mt-24'"
       *ngIf="tab == 'list'">
       <div class="m-20 sb-g-col-xs-12 sb-g-col-md-0 sb-g-col-lg-12 sb-g-col-xxxl-12 mt-15">
           <button class="sb-btn sb-btn-normal sb-btn-secondary mb-15" id="list" [ngClass]="[tab != 'calender' ? 'sb-btn-secondary ':'']" (click)="Openview('list')">List
