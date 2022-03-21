@@ -641,7 +641,14 @@ private async getSubPersonaConfig(subPersonaCode: string, persona: string, userL
 
 public onLocationModalClose() {
   this.showEditUserDetailsPopup = !this.showEditUserDetailsPopup;
-  this.showFullScreenLoader = true;
+  /*
+    @TODO - Bug #177424 - Profile > Edit Content Preference form issue -> This issue is resolved in release-4.6.0
+    Change in current code -
+    this.showFullScreenLoader = true;
+    TO
+    this.showFullScreenLoader = false;
+  */
+  this.showFullScreenLoader = false;
   setTimeout(() => {
     if (this.showFullScreenLoader) {
       this.showFullScreenLoader = false;
