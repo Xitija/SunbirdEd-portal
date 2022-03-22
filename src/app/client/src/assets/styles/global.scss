@@ -1439,3 +1439,15 @@ html[layout="joy"] .sb-modal-content .ui.center.aligned.segment {
 .required-asterisk {
   color: #A80011;
 }
+
+.relative9 .sb-textbox::placeholder{ 
+  font-weight: normal !important;
+}
+
+.relative9 .sb-textarea::placeholder{ 
+  font-size: small !important;
+  font-weight: normal !important;
+  position: absolute !important;;
+  left: 9px !important;;
+  top: 6px !important;;
+}
